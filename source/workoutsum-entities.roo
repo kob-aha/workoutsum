@@ -1,0 +1,48 @@
+project --topLevelPackage com.ka.workoutsum --packaging pom
+module create --moduleName workoutsum-domain --topLevelPackage com.ka.workoutsum.domain --parent com.ka.workoutsum:workoutsum:${project.version}
+jpa setup --database H2_IN_MEMORY --provider HIBERNATE 
+entity jpa --class ~.Muscle --table T_MUSCLE --testAutomatically
+field string --fieldName name --notNull
+entity jpa --class ~.Exercise --table T_EXERCISE --testAutomatically
+field string --fieldName name --notNull 
+field reference --fieldName targetedMuscle --type ~.Muscle --joinColumnName MUSCLE_ID --notNull 
+//entity jpa --class ~.WeightWorkout --table T_WEIGHT_WORKOUT --testAutomatically 
+//field string --fieldName goal
+//field number --fieldName createTime --column CREATE_TIME --type java.lang.Long --notNull
+//field reference --fieldName workout --type ~.WeightWorkout --joinColumnName WORKOUT_ID --notNull 
+// field set --fieldName exercises --element ~.WorkoutExercise --mappedBy workout
+entity jpa --class ~.WeightWorkout --table T_WEIGHT_WORKOUT --testAutomatically 
+field string --fieldName goal
+field number --fieldName createTime --column CREATE_TIME --type java.lang.Long --notNull
+// field set --fieldName exercises --element ~.WorkoutExercise --cardinality ONE_TO_MANY
+entity jpa --class ~.WorkoutExercise --table T_WORKOUT_EXERCISE --testAutomatically
+field string --fieldName remarks --sizeMax
+field number --fieldName setsNum --column SETS_NUM --type java.lang.Integer
+field number --fieldName repsNum --column REPS_NUM --type java.lang.Integer --notNull 
+field reference --class ~.WorkoutExercise --fieldName exercise --type ~.Exercise --joinColumnName EXERCISE_ID
+field reference --class ~.WorkoutExercise --fieldName workout --type ~.WeightWorkout --joinColumnName WEIGHT_WORKOUT_ID
+entity jpa --class ~.CardioWorkout --table T_CARDIO_WORKOUT --testAutomatically 
+field string --fieldName type --sizeMax 100
+entity jpa --class ~.CardioLogRec --table T_CARDIO_LOG_REC --testAutomatically 
+field reference --fieldName workout --type ~.CardioWorkout --joinColumnName WORKOUT_ID --notNull
+field number ---fieldName avgHeartRate --column AVG_HEART_RATE --type java.lang.Float --digitsInteger 2 --digitsFraction 2
+field number --fieldName avgSpeed --column AVG_SPEED --type java.lang.Float --digitsInteger 2 --digitsFraction 2
+field boolean --fieldName indoor --class ~.CardioLogRec
+field number --fieldName km --type java.lang.Float --digitsInteger 2 --digitsFraction 2
+entity jpa --class ~.WeightWorkoutLogRec --table T_WEIGHT_WORKOUT_LOG_REC --testAutomatically 
+field reference --fieldName workout --type ~.WeightWorkout --joinColumnName WORKOUT_ID --notNull
+field number --fieldName workoutTime --column WORKOUT_TIME --type java.lang.Long --digitsInteger 20 --digitsFraction 0
+field string --fieldName workoutDuration
+entity jpa --class ~.ExerciseLogRec --table T_EXERCISE_LOG_REC --testAutomatically 
+field reference --type ~.WeightWorkoutLogRec --fieldName workoutLogRec --joinColumnName WORKOUT_LOG_REC_ID --notNull
+field reference --fieldName exercise --type ~.Exercise --notNull --joinColumnName EXERCISE_ID
+field set --class ~.WeightWorkoutLogRec --fieldName exerciseLogRecs --mappedBy workoutLogRec --type ~.ExerciseLogRec --cardinality ONE_TO_MANY
+field set --class ~.Exercise --fieldName weightWorkoutLogRecs --mappedBy exercise --type ~.ExerciseLogRec --cardinality ONE_TO_MANY
+entity jpa --table T_EXERCISE_SET --testAutomatically --class ~.ExerciseSet
+field number --fieldName repsNum --column REPS_NUM --notNull --type java.lang.Integer
+field number --fieldName platesNum --column PLATES_NUM --type java.lang.Integer
+field number --fieldName weight --type java.math.BigDecimal
+field string --fieldName remarks
+field reference --fieldName exerciseLogRec --type ~.ExerciseLogRec --notNull --joinColumnName EXERCISE_LOG_REC_ID
+field number --fieldName test --type java.lang.Integer --max 99
+field number --fieldName setsNum --column SETS_NUM --notNull --type java.lang.Integer --digitsInteger 2 --digitsFraction 0 --max 99

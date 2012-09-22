@@ -1,0 +1,427 @@
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-09-21 22:15:38
+project --topLevelPackage com.ka.workoutsum
+persistence setup --provider HIBERNATE --database ORACLE --hostName localhost --userName workoutsum --password workoutsum
+hint
+// [failed] script --file workoutsum.roo
+quit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-09-21 22:21:58
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-09-21 22:25:49
+project --topLevelPackage com.ka.workoutsum
+jpa setup --database H2_IN_MEMORY --provider HIBERNATE 
+entity jpa --class ~.domain.Muscle --table T_MUSCLE --testAutomatically
+field string --fieldName name --notNull
+perform tests
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-09-21 22:53:02
+project --topLevelPackage com.ka.workoutsum
+jpa setup --database H2_IN_MEMORY --provider HIBERNATE 
+entity jpa --class ~.domain.Muscle --table T_MUSCLE --testAutomatically
+field string --fieldName name --notNull
+entity jpa --class ~.domain.Exercise --table T_EXERCISE --testAutomatically
+field string --fieldName name --notNull 
+field reference --fieldName targetedMuscle --type ~.domain.Muscle --joinColumnName MUSCLE_ID --notNull 
+entity jpa --class ~.domain.WorkoutExercise --table T_WORKOUT_EXERCISE --testAutomatically
+field string --fieldName remarks --sizeMax
+field number --fieldName setsNum --column SETS_NUM --type java.lang.Integer
+field number --fieldName repsNum --column REPS_NUM --type java.lang.Integer --notNull 
+entity jpa --class ~.domain.WeightWorkout --table T_WEIGHT_WORKOUT --testAutomatically 
+field string --fieldName goal
+field number --fieldName createTime --column CREATE_TIME --type java.lang.Long --notNull
+field reference --fieldName workout --type ~.domain.WeightWorkout --joinColumnName WORKOUT_ID --notNull 
+// [failed] script --file workoutsum-entities.roo
+exit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-09-21 22:57:44
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-09-21 22:58:04
+project --topLevelPackage com.ka.workoutsum
+jpa setup --database H2_IN_MEMORY --provider HIBERNATE 
+entity jpa --class ~.domain.Muscle --table T_MUSCLE --testAutomatically
+field string --fieldName name --notNull
+entity jpa --class ~.domain.Exercise --table T_EXERCISE --testAutomatically
+field string --fieldName name --notNull 
+field reference --fieldName targetedMuscle --type ~.domain.Muscle --joinColumnName MUSCLE_ID --notNull 
+entity jpa --class ~.domain.WorkoutExercise --table T_WORKOUT_EXERCISE --testAutomatically
+field string --fieldName remarks --sizeMax
+field number --fieldName setsNum --column SETS_NUM --type java.lang.Integer
+field number --fieldName repsNum --column REPS_NUM --type java.lang.Integer --notNull 
+entity jpa --class ~.domain.WeightWorkout --table T_WEIGHT_WORKOUT --testAutomatically 
+field string --fieldName goal
+field number --fieldName createTime --column CREATE_TIME --type java.lang.Long --notNull
+field reference --fieldName workout --type ~.domain.WeightWorkout --joinColumnName WORKOUT_ID --notNull 
+entity jpa --class ~.domain.WeightWorkout --table T_WEIGHT_WORKOUT --testAutomatically 
+field string --fieldName goal
+field number --fieldName createTime --column CREATE_TIME --type java.lang.Long --notNull
+entity jpa --class ~.domain.CardioWorkout --table T_CARDIO_WORKOUT --testAutomatically 
+field string --fieldName type --sizeMax 100
+entity jpa --class ~.domain.CardioLogRecord --table T_CARDIO_LOG_REC --testAutomatically 
+field reference --fieldName workout --type ~.domain.CardioWorkout --joinColumnName WORKOUT_ID --notNull
+field number ---fieldName avgHeartRate --column AVG_HEART_RATE --type java.lang.Float --digitsInteger 2 --digitsFraction 2
+field number --fieldName avgSpeed --column AVG_SPEED --type java.lang.Float --digitsInteger 2 --digitsFraction 2
+field number --fieldName indoor --type java.la
+field number --fieldName km --type java.lang.Integer --digitsInteger 2 --digitsFraction 2
+entity jpa --class ~.domain.WeightWorkoutLogRec --table T_WEIGHT_WORKOUT_LOG_REC --testAutomatically 
+field reference --fieldName workout --type ~.domain.WeightWorkout --joinColumnName WORKOUT_ID --notNull
+field number --fieldName workoutTime --column WORKOUT_TIME --type java.lang.Long --digitsInteger 20 --digitsFraction 0
+// [failed] script --file workoutsum-entities.roo
+field string --fieldName workoutDuration
+entity jpa --class ~.domain.ExerciseLogRec --table T_EXERCISE_LOG_REC --testAutomatically 
+field reference --type ~.domain.WeightWorkoutLogRec --fieldName workoutLogRec --joinColumnName WORKOUT_LOG_REC_ID --notNull
+field reference --fieldName exercise --type ~.domain.Exercise --notNull --joinColumnName EXERCISE_ID
+// [failed] field number --fieldName repsNum --column REPS_NUM --notNull --type java.lang.Integer
+// [failed] field number --fieldName platesNum --column PLATES_NUM --type java.lang.Integer
+// [failed] field number --fieldName weight --type java.math.BigDecimal
+// [failed] field string --fieldName remarks
+// [failed] field reference --fieldName exerciseLogRec --type ~.domain.ExerciseLogRec --notNull --joinColumnName EXERCISE_LOG_REC_ID
+// [failed] field number --fieldName test --type java.lang.Integer --max 99
+// [failed] field number --fieldName setsNum --column SETS_NUM --notNull --type java.lang.Integer --digitsInteger 2 --digitsFraction 0 --max 99
+exit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-09-21 23:01:00
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-09-21 23:01:12
+project --topLevelPackage com.ka.workoutsum
+jpa setup --database H2_IN_MEMORY --provider HIBERNATE 
+entity jpa --class ~.domain.Muscle --table T_MUSCLE --testAutomatically
+field string --fieldName name --notNull
+entity jpa --class ~.domain.Exercise --table T_EXERCISE --testAutomatically
+field string --fieldName name --notNull 
+field reference --fieldName targetedMuscle --type ~.domain.Muscle --joinColumnName MUSCLE_ID --notNull 
+entity jpa --class ~.domain.WorkoutExercise --table T_WORKOUT_EXERCISE --testAutomatically
+field string --fieldName remarks --sizeMax
+field number --fieldName setsNum --column SETS_NUM --type java.lang.Integer
+field number --fieldName repsNum --column REPS_NUM --type java.lang.Integer --notNull 
+entity jpa --class ~.domain.WeightWorkout --table T_WEIGHT_WORKOUT --testAutomatically 
+field string --fieldName goal
+field number --fieldName createTime --column CREATE_TIME --type java.lang.Long --notNull
+field reference --fieldName workout --type ~.domain.WeightWorkout --joinColumnName WORKOUT_ID --notNull 
+entity jpa --class ~.domain.WeightWorkout --table T_WEIGHT_WORKOUT --testAutomatically 
+field string --fieldName goal
+field number --fieldName createTime --column CREATE_TIME --type java.lang.Long --notNull
+entity jpa --class ~.domain.CardioWorkout --table T_CARDIO_WORKOUT --testAutomatically 
+field string --fieldName type --sizeMax 100
+entity jpa --class ~.domain.CardioLogRecord --table T_CARDIO_LOG_REC --testAutomatically 
+field reference --fieldName workout --type ~.domain.CardioWorkout --joinColumnName WORKOUT_ID --notNull
+field number ---fieldName avgHeartRate --column AVG_HEART_RATE --type java.lang.Float --digitsInteger 2 --digitsFraction 2
+field number --fieldName avgSpeed --column AVG_SPEED --type java.lang.Float --digitsInteger 2 --digitsFraction 2
+field number --fieldName indoor --type java.la
+field number --fieldName km --type java.lang.Integer --digitsInteger 2 --digitsFraction 2
+entity jpa --class ~.domain.WeightWorkoutLogRec --table T_WEIGHT_WORKOUT_LOG_REC --testAutomatically 
+field reference --fieldName workout --type ~.domain.WeightWorkout --joinColumnName WORKOUT_ID --notNull
+field number --fieldName workoutTime --column WORKOUT_TIME --type java.lang.Long --digitsInteger 20 --digitsFraction 0
+// [failed] script --file workoutsum-entities.roo
+exit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-09-21 23:01:47
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-09-21 23:01:55
+project --topLevelPackage com.ka.workoutsum
+jpa setup --database H2_IN_MEMORY --provider HIBERNATE 
+entity jpa --class ~.domain.Muscle --table T_MUSCLE --testAutomatically
+field string --fieldName name --notNull
+entity jpa --class ~.domain.Exercise --table T_EXERCISE --testAutomatically
+field string --fieldName name --notNull 
+field reference --fieldName targetedMuscle --type ~.domain.Muscle --joinColumnName MUSCLE_ID --notNull 
+entity jpa --class ~.domain.WorkoutExercise --table T_WORKOUT_EXERCISE --testAutomatically
+field string --fieldName remarks --sizeMax
+field number --fieldName setsNum --column SETS_NUM --type java.lang.Integer
+field number --fieldName repsNum --column REPS_NUM --type java.lang.Integer --notNull 
+entity jpa --class ~.domain.WeightWorkout --table T_WEIGHT_WORKOUT --testAutomatically 
+field string --fieldName goal
+field number --fieldName createTime --column CREATE_TIME --type java.lang.Long --notNull
+field reference --fieldName workout --type ~.domain.WeightWorkout --joinColumnName WORKOUT_ID --notNull 
+entity jpa --class ~.domain.WeightWorkout --table T_WEIGHT_WORKOUT --testAutomatically 
+field string --fieldName goal
+field number --fieldName createTime --column CREATE_TIME --type java.lang.Long --notNull
+entity jpa --class ~.domain.CardioWorkout --table T_CARDIO_WORKOUT --testAutomatically 
+field string --fieldName type --sizeMax 100
+entity jpa --class ~.domain.CardioLogRecord --table T_CARDIO_LOG_REC --testAutomatically 
+field reference --fieldName workout --type ~.domain.CardioWorkout --joinColumnName WORKOUT_ID --notNull
+field number ---fieldName avgHeartRate --column AVG_HEART_RATE --type java.lang.Float --digitsInteger 2 --digitsFraction 2
+field number --fieldName avgSpeed --column AVG_SPEED --type java.lang.Float --digitsInteger 2 --digitsFraction 2
+field number --fieldName indoor --type java.la
+field number --fieldName km --type java.lang.Integer --digitsInteger 2 --digitsFraction 2
+entity jpa --class ~.domain.WeightWorkoutLogRec --table T_WEIGHT_WORKOUT_LOG_REC --testAutomatically 
+field reference --fieldName workout --type ~.domain.WeightWorkout --joinColumnName WORKOUT_ID --notNull
+field number --fieldName workoutTime --column WORKOUT_TIME --type java.lang.Long --digitsInteger 20 --digitsFraction 0
+field string --fieldName workoutDuration
+entity jpa --class ~.domain.ExerciseLogRec --table T_EXERCISE_LOG_REC --testAutomatically 
+field reference --type ~.domain.WeightWorkoutLogRec --fieldName workoutLogRec --joinColumnName WORKOUT_LOG_REC_ID --notNull
+field reference --fieldName exercise --type ~.domain.Exercise --notNull --joinColumnName EXERCISE_ID
+// [failed] script --file workoutsum-entities.roo
+exit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-09-21 23:03:13
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-09-21 23:03:21
+project --topLevelPackage com.ka.workoutsum
+jpa setup --database H2_IN_MEMORY --provider HIBERNATE 
+entity jpa --class ~.domain.Muscle --table T_MUSCLE --testAutomatically
+field string --fieldName name --notNull
+entity jpa --class ~.domain.Exercise --table T_EXERCISE --testAutomatically
+field string --fieldName name --notNull 
+field reference --fieldName targetedMuscle --type ~.domain.Muscle --joinColumnName MUSCLE_ID --notNull 
+entity jpa --class ~.domain.WorkoutExercise --table T_WORKOUT_EXERCISE --testAutomatically
+field string --fieldName remarks --sizeMax
+field number --fieldName setsNum --column SETS_NUM --type java.lang.Integer
+field number --fieldName repsNum --column REPS_NUM --type java.lang.Integer --notNull 
+entity jpa --class ~.domain.WeightWorkout --table T_WEIGHT_WORKOUT --testAutomatically 
+field string --fieldName goal
+field number --fieldName createTime --column CREATE_TIME --type java.lang.Long --notNull
+field reference --fieldName workout --type ~.domain.WeightWorkout --joinColumnName WORKOUT_ID --notNull 
+entity jpa --class ~.domain.WeightWorkout --table T_WEIGHT_WORKOUT --testAutomatically 
+field string --fieldName goal
+field number --fieldName createTime --column CREATE_TIME --type java.lang.Long --notNull
+entity jpa --class ~.domain.CardioWorkout --table T_CARDIO_WORKOUT --testAutomatically 
+field string --fieldName type --sizeMax 100
+entity jpa --class ~.domain.CardioLogRecord --table T_CARDIO_LOG_REC --testAutomatically 
+field reference --fieldName workout --type ~.domain.CardioWorkout --joinColumnName WORKOUT_ID --notNull
+field number ---fieldName avgHeartRate --column AVG_HEART_RATE --type java.lang.Float --digitsInteger 2 --digitsFraction 2
+field number --fieldName avgSpeed --column AVG_SPEED --type java.lang.Float --digitsInteger 2 --digitsFraction 2
+field number --fieldName indoor --type java.la
+field number --fieldName km --type java.lang.Integer --digitsInteger 2 --digitsFraction 2
+entity jpa --class ~.domain.WeightWorkoutLogRec --table T_WEIGHT_WORKOUT_LOG_REC --testAutomatically 
+field reference --fieldName workout --type ~.domain.WeightWorkout --joinColumnName WORKOUT_ID --notNull
+field number --fieldName workoutTime --column WORKOUT_TIME --type java.lang.Long --digitsInteger 20 --digitsFraction 0
+field string --fieldName workoutDuration
+entity jpa --class ~.domain.ExerciseLogRec --table T_EXERCISE_LOG_REC --testAutomatically 
+field reference --type ~.domain.WeightWorkoutLogRec --fieldName workoutLogRec --joinColumnName WORKOUT_LOG_REC_ID --notNull
+field reference --fieldName exercise --type ~.domain.Exercise --notNull --joinColumnName EXERCISE_ID
+// [failed] script --file workoutsum-entities.roo
+entity jpa --table T_EXERCISE_SET --testAutomatically --class ~.domain.ExerciseSet
+exit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-09-21 23:05:05
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-09-21 23:05:14
+project --topLevelPackage com.ka.workoutsum
+jpa setup --database H2_IN_MEMORY --provider HIBERNATE 
+entity jpa --class ~.domain.Muscle --table T_MUSCLE --testAutomatically
+field string --fieldName name --notNull
+entity jpa --class ~.domain.Exercise --table T_EXERCISE --testAutomatically
+field string --fieldName name --notNull 
+field reference --fieldName targetedMuscle --type ~.domain.Muscle --joinColumnName MUSCLE_ID --notNull 
+entity jpa --class ~.domain.WorkoutExercise --table T_WORKOUT_EXERCISE --testAutomatically
+field string --fieldName remarks --sizeMax
+field number --fieldName setsNum --column SETS_NUM --type java.lang.Integer
+field number --fieldName repsNum --column REPS_NUM --type java.lang.Integer --notNull 
+entity jpa --class ~.domain.WeightWorkout --table T_WEIGHT_WORKOUT --testAutomatically 
+field string --fieldName goal
+field number --fieldName createTime --column CREATE_TIME --type java.lang.Long --notNull
+field reference --fieldName workout --type ~.domain.WeightWorkout --joinColumnName WORKOUT_ID --notNull 
+entity jpa --class ~.domain.WeightWorkout --table T_WEIGHT_WORKOUT --testAutomatically 
+field string --fieldName goal
+field number --fieldName createTime --column CREATE_TIME --type java.lang.Long --notNull
+entity jpa --class ~.domain.CardioWorkout --table T_CARDIO_WORKOUT --testAutomatically 
+field string --fieldName type --sizeMax 100
+entity jpa --class ~.domain.CardioLogRecord --table T_CARDIO_LOG_REC --testAutomatically 
+field reference --fieldName workout --type ~.domain.CardioWorkout --joinColumnName WORKOUT_ID --notNull
+field number ---fieldName avgHeartRate --column AVG_HEART_RATE --type java.lang.Float --digitsInteger 2 --digitsFraction 2
+field number --fieldName avgSpeed --column AVG_SPEED --type java.lang.Float --digitsInteger 2 --digitsFraction 2
+field number --fieldName indoor --type java.la
+field number --fieldName km --type java.lang.Integer --digitsInteger 2 --digitsFraction 2
+entity jpa --class ~.domain.WeightWorkoutLogRec --table T_WEIGHT_WORKOUT_LOG_REC --testAutomatically 
+field reference --fieldName workout --type ~.domain.WeightWorkout --joinColumnName WORKOUT_ID --notNull
+field number --fieldName workoutTime --column WORKOUT_TIME --type java.lang.Long --digitsInteger 20 --digitsFraction 0
+field string --fieldName workoutDuration
+entity jpa --class ~.domain.ExerciseLogRec --table T_EXERCISE_LOG_REC --testAutomatically 
+field reference --type ~.domain.WeightWorkoutLogRec --fieldName workoutLogRec --joinColumnName WORKOUT_LOG_REC_ID --notNull
+field reference --fieldName exercise --type ~.domain.Exercise --notNull --joinColumnName EXERCISE_ID
+entity jpa --table T_EXERCISE_SET --testAutomatically --class ~.domain.ExerciseSet
+field number --fieldName repsNum --column REPS_NUM --notNull --type java.lang.Integer
+field number --fieldName platesNum --column PLATES_NUM --type java.lang.Integer
+field number --fieldName weight --type java.math.BigDecimal
+field string --fieldName remarks
+field reference --fieldName exerciseLogRec --type ~.domain.ExerciseLogRec --notNull --joinColumnName EXERCISE_LOG_REC_ID
+field number --fieldName test --type java.lang.Integer --max 99
+field number --fieldName setsNum --column SETS_NUM --notNull --type java.lang.Integer --digitsInteger 2 --digitsFraction 0 --max 99
+// script --file workoutsum-entities.roo
+perform eclipse
+perform eclipse
+perform tests
+perform tests
+exit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-09-22 09:20:22
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-09-22 09:20:54
+project --topLevelPackage com.ka.workoutsum
+jpa setup --database H2_IN_MEMORY --provider HIBERNATE 
+entity jpa --class ~.domain.Muscle --table T_MUSCLE --testAutomatically
+field string --fieldName name --notNull
+entity jpa --class ~.domain.Exercise --table T_EXERCISE --testAutomatically
+field string --fieldName name --notNull 
+field reference --fieldName targetedMuscle --type ~.domain.Muscle --joinColumnName MUSCLE_ID --notNull 
+entity jpa --class ~.domain.WorkoutExercise --table T_WORKOUT_EXERCISE --testAutomatically
+field string --fieldName remarks --sizeMax
+field number --fieldName setsNum --column SETS_NUM --type java.lang.Integer
+field number --fieldName repsNum --column REPS_NUM --type java.lang.Integer --notNull 
+entity jpa --class ~.domain.WeightWorkout --table T_WEIGHT_WORKOUT --testAutomatically 
+field string --fieldName goal
+field number --fieldName createTime --column CREATE_TIME --type java.lang.Long --notNull
+field reference --fieldName workout --type ~.domain.WeightWorkout --joinColumnName WORKOUT_ID --notNull 
+entity jpa --class ~.domain.WeightWorkout --table T_WEIGHT_WORKOUT --testAutomatically 
+field string --fieldName goal
+field number --fieldName createTime --column CREATE_TIME --type java.lang.Long --notNull
+entity jpa --class ~.domain.CardioWorkout --table T_CARDIO_WORKOUT --testAutomatically 
+field string --fieldName type --sizeMax 100
+entity jpa --class ~.domain.CardioLogRecord --table T_CARDIO_LOG_REC --testAutomatically 
+field reference --fieldName workout --type ~.domain.CardioWorkout --joinColumnName WORKOUT_ID --notNull
+field number ---fieldName avgHeartRate --column AVG_HEART_RATE --type java.lang.Float --digitsInteger 2 --digitsFraction 2
+field number --fieldName avgSpeed --column AVG_SPEED --type java.lang.Float --digitsInteger 2 --digitsFraction 2
+field number --fieldName km --type java.lang.Integer --digitsInteger 2 --digitsFraction 2
+entity jpa --class ~.domain.WeightWorkoutLogRec --table T_WEIGHT_WORKOUT_LOG_REC --testAutomatically 
+field reference --fieldName workout --type ~.domain.WeightWorkout --joinColumnName WORKOUT_ID --notNull
+field number --fieldName workoutTime --column WORKOUT_TIME --type java.lang.Long --digitsInteger 20 --digitsFraction 0
+field string --fieldName workoutDuration
+entity jpa --class ~.domain.ExerciseLogRec --table T_EXERCISE_LOG_REC --testAutomatically 
+field reference --type ~.domain.WeightWorkoutLogRec --fieldName workoutLogRec --joinColumnName WORKOUT_LOG_REC_ID --notNull
+field reference --fieldName exercise --type ~.domain.Exercise --notNull --joinColumnName EXERCISE_ID
+entity jpa --table T_EXERCISE_SET --testAutomatically --class ~.domain.ExerciseSet
+field number --fieldName repsNum --column REPS_NUM --notNull --type java.lang.Integer
+field number --fieldName platesNum --column PLATES_NUM --type java.lang.Integer
+field number --fieldName weight --type java.math.BigDecimal
+field string --fieldName remarks
+field reference --fieldName exerciseLogRec --type ~.domain.ExerciseLogRec --notNull --joinColumnName EXERCISE_LOG_REC_ID
+field number --fieldName test --type java.lang.Integer --max 99
+field number --fieldName setsNum --column SETS_NUM --notNull --type java.lang.Integer --digitsInteger 2 --digitsFraction 0 --max 99
+// script --file workoutsum-entities.roo
+perform tests
+perform eclipse
+perform package
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-09-22 12:57:17
+project --topLevelPackage com.ka.workoutsum
+jpa setup --database H2_IN_MEMORY --provider HIBERNATE 
+entity jpa --class ~.domain.Muscle --table T_MUSCLE --testAutomatically
+field string --fieldName name --notNull
+entity jpa --class ~.domain.Exercise --table T_EXERCISE --testAutomatically
+field string --fieldName name --notNull 
+field reference --fieldName targetedMuscle --type ~.domain.Muscle --joinColumnName MUSCLE_ID --notNull 
+entity jpa --class ~.domain.WorkoutExercise --table T_WORKOUT_EXERCISE --testAutomatically
+field string --fieldName remarks --sizeMax
+field number --fieldName setsNum --column SETS_NUM --type java.lang.Integer
+field number --fieldName repsNum --column REPS_NUM --type java.lang.Integer --notNull 
+entity jpa --class ~.domain.WeightWorkout --table T_WEIGHT_WORKOUT --testAutomatically 
+field string --fieldName goal
+field number --fieldName createTime --column CREATE_TIME --type java.lang.Long --notNull
+field reference --fieldName workout --type ~.domain.WeightWorkout --joinColumnName WORKOUT_ID --notNull 
+entity jpa --class ~.domain.WeightWorkout --table T_WEIGHT_WORKOUT --testAutomatically 
+field string --fieldName goal
+field number --fieldName createTime --column CREATE_TIME --type java.lang.Long --notNull
+entity jpa --class ~.domain.CardioWorkout --table T_CARDIO_WORKOUT --testAutomatically 
+field string --fieldName type --sizeMax 100
+entity jpa --class ~.domain.CardioLogRecord --table T_CARDIO_LOG_REC --testAutomatically 
+field reference --fieldName workout --type ~.domain.CardioWorkout --joinColumnName WORKOUT_ID --notNull
+field number ---fieldName avgHeartRate --column AVG_HEART_RATE --type java.lang.Float --digitsInteger 2 --digitsFraction 2
+field number --fieldName avgSpeed --column AVG_SPEED --type java.lang.Float --digitsInteger 2 --digitsFraction 2
+field number --fieldName km --type java.lang.Float --digitsInteger 2 --digitsFraction 2
+entity jpa --class ~.domain.WeightWorkoutLogRec --table T_WEIGHT_WORKOUT_LOG_REC --testAutomatically 
+field reference --fieldName workout --type ~.domain.WeightWorkout --joinColumnName WORKOUT_ID --notNull
+field number --fieldName workoutTime --column WORKOUT_TIME --type java.lang.Long --digitsInteger 20 --digitsFraction 0
+field string --fieldName workoutDuration
+entity jpa --class ~.domain.ExerciseLogRec --table T_EXERCISE_LOG_REC --testAutomatically 
+field reference --type ~.domain.WeightWorkoutLogRec --fieldName workoutLogRec --joinColumnName WORKOUT_LOG_REC_ID --notNull
+field reference --fieldName exercise --type ~.domain.Exercise --notNull --joinColumnName EXERCISE_ID
+entity jpa --table T_EXERCISE_SET --testAutomatically --class ~.domain.ExerciseSet
+field number --fieldName repsNum --column REPS_NUM --notNull --type java.lang.Integer
+field number --fieldName platesNum --column PLATES_NUM --type java.lang.Integer
+field number --fieldName weight --type java.math.BigDecimal
+field string --fieldName remarks
+field reference --fieldName exerciseLogRec --type ~.domain.ExerciseLogRec --notNull --joinColumnName EXERCISE_LOG_REC_ID
+field number --fieldName test --type java.lang.Integer --max 99
+field number --fieldName setsNum --column SETS_NUM --notNull --type java.lang.Integer --digitsInteger 2 --digitsFraction 0 --max 99
+// script --file workoutsum-entities.roo
+module create --moduleName model --topLevelPackage com.ka.workoutsum.model
+exit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-09-22 13:01:26
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-09-22 13:02:17
+project --topLevelPackage com.ka.workoutsum
+module create --moduleName model --topLevelPackage com.ka.workoutsum.model
+jpa setup --database H2_IN_MEMORY --provider HIBERNATE 
+entity jpa --class ~.domain.Muscle --table T_MUSCLE --testAutomatically
+field string --fieldName name --notNull
+entity jpa --class ~.domain.Exercise --table T_EXERCISE --testAutomatically
+field string --fieldName name --notNull 
+field reference --fieldName targetedMuscle --type ~.domain.Muscle --joinColumnName MUSCLE_ID --notNull 
+entity jpa --class ~.domain.WorkoutExercise --table T_WORKOUT_EXERCISE --testAutomatically
+field string --fieldName remarks --sizeMax
+field number --fieldName setsNum --column SETS_NUM --type java.lang.Integer
+field number --fieldName repsNum --column REPS_NUM --type java.lang.Integer --notNull 
+entity jpa --class ~.domain.WeightWorkout --table T_WEIGHT_WORKOUT --testAutomatically 
+field string --fieldName goal
+field number --fieldName createTime --column CREATE_TIME --type java.lang.Long --notNull
+field reference --fieldName workout --type ~.domain.WeightWorkout --joinColumnName WORKOUT_ID --notNull 
+entity jpa --class ~.domain.WeightWorkout --table T_WEIGHT_WORKOUT --testAutomatically 
+field string --fieldName goal
+field number --fieldName createTime --column CREATE_TIME --type java.lang.Long --notNull
+entity jpa --class ~.domain.CardioWorkout --table T_CARDIO_WORKOUT --testAutomatically 
+field string --fieldName type --sizeMax 100
+entity jpa --class ~.domain.CardioLogRecord --table T_CARDIO_LOG_REC --testAutomatically 
+field reference --fieldName workout --type ~.domain.CardioWorkout --joinColumnName WORKOUT_ID --notNull
+field number ---fieldName avgHeartRate --column AVG_HEART_RATE --type java.lang.Float --digitsInteger 2 --digitsFraction 2
+field number --fieldName avgSpeed --column AVG_SPEED --type java.lang.Float --digitsInteger 2 --digitsFraction 2
+field number --fieldName km --type java.lang.Float --digitsInteger 2 --digitsFraction 2
+entity jpa --class ~.domain.WeightWorkoutLogRec --table T_WEIGHT_WORKOUT_LOG_REC --testAutomatically 
+field reference --fieldName workout --type ~.domain.WeightWorkout --joinColumnName WORKOUT_ID --notNull
+field number --fieldName workoutTime --column WORKOUT_TIME --type java.lang.Long --digitsInteger 20 --digitsFraction 0
+field string --fieldName workoutDuration
+entity jpa --class ~.domain.ExerciseLogRec --table T_EXERCISE_LOG_REC --testAutomatically 
+field reference --type ~.domain.WeightWorkoutLogRec --fieldName workoutLogRec --joinColumnName WORKOUT_LOG_REC_ID --notNull
+field reference --fieldName exercise --type ~.domain.Exercise --notNull --joinColumnName EXERCISE_ID
+entity jpa --table T_EXERCISE_SET --testAutomatically --class ~.domain.ExerciseSet
+field number --fieldName repsNum --column REPS_NUM --notNull --type java.lang.Integer
+field number --fieldName platesNum --column PLATES_NUM --type java.lang.Integer
+field number --fieldName weight --type java.math.BigDecimal
+field string --fieldName remarks
+field reference --fieldName exerciseLogRec --type ~.domain.ExerciseLogRec --notNull --joinColumnName EXERCISE_LOG_REC_ID
+field number --fieldName test --type java.lang.Integer --max 99
+field number --fieldName setsNum --column SETS_NUM --notNull --type java.lang.Integer --digitsInteger 2 --digitsFraction 0 --max 99
+// script --file workoutsum-entities.roo
+exit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-09-22 13:03:32
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-09-22 13:10:27
+perform tests
+perform eclipse
+exit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-09-22 13:38:52
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-09-22 13:43:55
+project --topLevelPackage com.ka.workoutsum --packaging pom
+// [failed] script --file workoutsum-entities.roo
+module create --moduleName model --topLevelPackage com.ka.workoutsum.model --parent com.ka.workoutsum:workoutsum:${project.version}
+jpa setup --database H2_IN_MEMORY --provider HIBERNATE 
+entity jpa --class ~.domain.Muscle --table T_MUSCLE --testAutomatically
+field string --fieldName name --notNull
+entity jpa --class ~.domain.Exercise --table T_EXERCISE --testAutomatically
+field string --fieldName name --notNull 
+field reference --fieldName targetedMuscle --type ~.domain.Muscle --joinColumnName MUSCLE_ID --notNull 
+entity jpa --class ~.domain.WorkoutExercise --table T_WORKOUT_EXERCISE --testAutomatically
+field string --fieldName remarks --sizeMax
+field number --fieldName setsNum --column SETS_NUM --type java.lang.Integer
+field number --fieldName repsNum --column REPS_NUM --type java.lang.Integer --notNull 
+entity jpa --class ~.domain.WeightWorkout --table T_WEIGHT_WORKOUT --testAutomatically 
+field string --fieldName goal
+field number --fieldName createTime --column CREATE_TIME --type java.lang.Long --notNull
+field reference --fieldName workout --type ~.domain.WeightWorkout --joinColumnName WORKOUT_ID --notNull 
+entity jpa --class ~.domain.WeightWorkout --table T_WEIGHT_WORKOUT --testAutomatically 
+field string --fieldName goal
+field number --fieldName createTime --column CREATE_TIME --type java.lang.Long --notNull
+entity jpa --class ~.domain.CardioWorkout --table T_CARDIO_WORKOUT --testAutomatically 
+field string --fieldName type --sizeMax 100
+entity jpa --class ~.domain.CardioLogRecord --table T_CARDIO_LOG_REC --testAutomatically 
+field reference --fieldName workout --type ~.domain.CardioWorkout --joinColumnName WORKOUT_ID --notNull
+field number ---fieldName avgHeartRate --column AVG_HEART_RATE --type java.lang.Float --digitsInteger 2 --digitsFraction 2
+field number --fieldName avgSpeed --column AVG_SPEED --type java.lang.Float --digitsInteger 2 --digitsFraction 2
+field number --fieldName km --type java.lang.Float --digitsInteger 2 --digitsFraction 2
+entity jpa --class ~.domain.WeightWorkoutLogRec --table T_WEIGHT_WORKOUT_LOG_REC --testAutomatically 
+field reference --fieldName workout --type ~.domain.WeightWorkout --joinColumnName WORKOUT_ID --notNull
+field number --fieldName workoutTime --column WORKOUT_TIME --type java.lang.Long --digitsInteger 20 --digitsFraction 0
+field string --fieldName workoutDuration
+entity jpa --class ~.domain.ExerciseLogRec --table T_EXERCISE_LOG_REC --testAutomatically 
+field reference --type ~.domain.WeightWorkoutLogRec --fieldName workoutLogRec --joinColumnName WORKOUT_LOG_REC_ID --notNull
+field reference --fieldName exercise --type ~.domain.Exercise --notNull --joinColumnName EXERCISE_ID
+entity jpa --table T_EXERCISE_SET --testAutomatically --class ~.domain.ExerciseSet
+field number --fieldName repsNum --column REPS_NUM --notNull --type java.lang.Integer
+field number --fieldName platesNum --column PLATES_NUM --type java.lang.Integer
+field number --fieldName weight --type java.math.BigDecimal
+field string --fieldName remarks
+field reference --fieldName exerciseLogRec --type ~.domain.ExerciseLogRec --notNull --joinColumnName EXERCISE_LOG_REC_ID
+field number --fieldName test --type java.lang.Integer --max 99
+field number --fieldName setsNum --column SETS_NUM --notNull --type java.lang.Integer --digitsInteger 2 --digitsFraction 0 --max 99
+// script --file workoutsum-entities.roo
+perform eclipse
+perform eclipse
+perform eclipse
+perform eclipse
+perform eclipse
+exit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-09-22 13:53:51
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log opened at 2012-09-22 13:54:52
+exit
+// Spring Roo 1.2.2.RELEASE [rev 7d75659] log closed at 2012-09-22 14:00:52

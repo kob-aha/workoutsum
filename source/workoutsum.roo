@@ -1,0 +1,145 @@
+// Spring Roo 1.1.0.RC1 [rev 51cb976] log opened at 2010-10-23 22:27:13
+project --topLevelPackage com.ka.workoutsum
+persistence setup --provider HIBERNATE --database ORACLE --hostName localhost --userName workoutsum --password workoutsum
+hint
+entity jpa --class ~.domain.Muscle --table T_MUSCLE --testAutomatically
+field string --fieldName name --notNull 
+perform test
+entity jpa --class ~.domain.Exercise --table T_EXERCISE --testAutomatically
+field string --fieldName name --notNull 
+perform eclipse
+field reference --fieldName targetedMuscle --type ~.domain.Muscle --joinColumnName MUSCLE_ID --notNull 
+perform tests
+entity jpa --class ~.domain.WorkoutExercise --table T_WORKOUT_EXERCISE --testAutomatically
+field string --fieldName remarks --sizeMax
+field number --fieldName setsNum --column SETS_NUM --type java.lang.Integer
+perform tests
+field number --fieldName repsNum --column REPS_NUM --type java.lang.Integer --notNull 
+perform tests
+field reference --fieldName exercise --type ~.domain.Exercise --joinColumnName EXERCISE_ID// Spring Roo 1.1.0.RC1 [rev 51cb976] log opened at 2010-10-23 23:36:25
+project --topLevelPackage com.ka.workoutsum
+persistence setup --provider HIBERNATE --database ORACLE --hostName localhost --userName workoutsum --password workoutsum
+hint
+entity jpa --class ~.domain.Muscle --table T_MUSCLE --testAutomatically
+field string --fieldName name --notNull 
+perform test
+entity jpa --class ~.domain.Exercise --table T_EXERCISE --testAutomatically
+field string --fieldName name --notNull 
+perform eclipse
+field reference --fieldName targetedMuscle --type ~.domain.Muscle --joinColumnName MUSCLE_ID --notNull 
+perform tests
+entity jpa --class ~.domain.WorkoutExercise --table T_WORKOUT_EXERCISE --testAutomatically
+field string --fieldName remarks --sizeMax
+field number --fieldName setsNum --column SETS_NUM --type java.lang.Integer
+perform tests
+field number --fieldName repsNum --column REPS_NUM --type java.lang.Integer --notNull 
+perform tests
+// [failed] script --file log.roo
+help
+exit
+// Spring Roo 1.1.0.RC1 [rev 51cb976] log closed at 2010-10-23 23:40:18
+// Spring Roo 1.1.0.RC1 [rev 51cb976] log opened at 2010-10-23 23:40:21
+perform eclipse
+perform tests
+entity jpa --class ~.domain.WeightWorkout --table T_WEIGHT_WORKOUT --testAutomatically 
+field string --fieldName goal
+field number --fieldName createTime --column CREATE_TIME --type java.lang.Long --notNull
+quit
+// Spring Roo 1.1.0.RC1 [rev 51cb976] log closed at 2010-10-23 23:47:54
+// Spring Roo 1.1.0.RC1 [rev 51cb976] log opened at 2010-10-23 23:47:57
+hint
+// [failed] entity jpa --class ~.domain.WorkoutExercise
+field reference --fieldName workout --type ~.domain.WeightWorkout --joinColumnName WORKOUT_ID --notNull 
+// [failed] entity jpa --class ~.domain.WeightWorkout
+field set --fieldName exercises --element ~.domain.WorkoutExercise --mappedBy workout
+perform tests
+perform tests
+poll now
+perform tests
+entity jpa --class ~.domain.WeightWorkout --table T_WEIGHT_WORKOUT --testAutomatically 
+field string --fieldName goal
+field number --fieldName createTime --column CREATE_TIME --type java.lang.Long --notNull
+perform tests
+perform tests
+// [failed] field set --fieldName exercises --element ~.domain.WorkoutExercise --cardinality MANY_TO_ONE 
+field set --fieldName exercises --element ~.domain.WorkoutExercise --cardinality ONE_TO_MANY
+perform tests
+perform tests
+entity jpa --class ~.domain.CardioWorkout --table T_CARDIO_WORKOUT --testAutomatically 
+field string --fieldName type --sizeMax 100
+entity jpa --class ~.domain.CardioLogRecord --table T_CARDIO_LOG_REC --testAutomatically 
+field reference --fieldName workout --type ~.domain.CardioWorkout --joinColumnName WORKOUT_ID --notNull
+perform tests
+field number ---fieldName avgHeartRate --column AVG_HEART_RATE --type java.lang.Float --digitsInteger 2 --digitsFraction 2
+field number --fieldName avgSpeed --column AVG_SPEED --type java.lang.Float --digitsInteger 2 --digitsFraction 2
+field number --fieldName indoor --type java.la
+field number --fieldName km --type java.lang.Integer --digitsInteger 2 --digitsFraction 2
+perform tests
+entity jpa --class ~.domain.WeightWorkoutLogRec --table T_WEIGHT_WORKOUT_LOG_REC --testAutomatically 
+field reference --fieldName workout --type ~.domain.WeightWorkout --joinColumnName WORKOUT_ID --notNull
+perform tests
+// [failed] field number --fieldName workoutTime --column WORKOUT_TIME --type java.lang.Long --digitsInteger 20
+field number --fieldName workoutTime --column WORKOUT_TIME --type java.lang.Long --digitsInteger 20 --digitsFraction 0
+field string --fieldName workoutDuration --type 
+perform tests
+entity jpa --class ~.domain.ExerciseLogRec --table T_EXERCISE_LOG_REC --testAutomatically 
+field reference --type ~.domain.WeightWorkoutLogRec --fieldName workoutLogRec --joinColumnName WORKOUT_LOG_REC_ID --notNull
+field reference --fieldName exercise --type ~.domain.Exercise --notNull --joinColumnName EXERCISE_ID
+entity jpa --type ~.domain.ExerciseSet --table T_EXERCISE_SET --testAutomatically --class ~.domain.ExerciseSet
+field number --fieldName repsNum --column REPS_NUM --notNull --type java.lang.Integer
+field number --fieldName platesNum --column PLATES_NUM --type java.lang.Integer
+field number --fieldName weight --type java.math.BigDecimal
+field string --fieldName remarks
+field reference --fieldName exerciseLogRec --type ~.domain.ExerciseLogRec --notNull --joinColumnName EXERCISE_LOG_REC_ID
+perform tests
+perform tests
+poll now
+perform tests
+perform tests
+// Spring Roo 1.1.0.RC1 [rev 51cb976] log opened at 2010-10-25 21:46:48
+perform tests
+perform tests
+perform tests
+perform tests
+quit
+// Spring Roo 1.1.0.RC1 [rev 51cb976] log closed at 2010-10-25 22:45:31
+// Spring Roo 1.1.0.RC1 [rev 51cb976] log opened at 2010-10-25 22:45:34
+poll now
+// [failed] entity jpa --class ~.domain.WorkoutExercise
+field number --fieldName test --type java.lang.Integer --max 99
+field number --fieldName setsNum --column SETS_NUM --notNull --type java.lang.Integer --digitsInteger 2 --digitsFraction 0 --max 99
+perform tests
+// [failed] perform tests
+perform tests
+quit
+// Spring Roo 1.1.0.RC1 [rev 51cb976] log closed at 2010-10-26 19:05:24
+// Spring Roo 1.1.0.RC1 [rev 51cb976] log opened at 2010-10-28 21:53:02
+perform tests
+perform tests
+quit
+// Spring Roo 1.1.0.RC1 [rev 51cb976] log closed at 2010-10-28 22:48:07
+// Spring Roo 1.1.0.RC1 [rev 51cb976] log opened at 2010-10-29 18:38:42
+controller all --package ~.web
+perform eclipse
+perform tests
+dependency add --groupId net.sourceforge.htmlunit --artifactId htmlunit --version 2.8
+perform eclipse
+exit
+// Spring Roo 1.1.0.RC1 [rev 51cb976] log closed at 2010-11-06 10:19:41
+// Spring Roo 1.1.0.RC1 [rev 51cb976] log opened at 2010-11-06 23:26:07
+hint
+controller class --class ~web.WokoutExerc
+controller class --class ~web.WokoutExerciseTab --preferredMapping /workouttab
+exit
+// Spring Roo 1.1.0.RC1 [rev 51cb976] log closed at 2010-11-13 17:15:23
+// Spring Roo 1.1.0.RC1 [rev 51cb976] log opened at 2010-11-13 21:15:10
+// [failed] entity jpa --class ~.domain.WorkoutExercise
+field reference --fieldName exercise --type com.ka.workoutsum.domain.Exercise
+perform tests
+perform tests
+perform tests
+exit
+// Spring Roo 1.1.0.RC1 [rev 51cb976] log closed at 2010-11-16 22:17:52
+// Spring Roo 1.0.2.RELEASE [rev 638] log opened at 2011-01-31 18:29:37
+exit
+// Spring Roo 1.0.2.RELEASE [rev 638] log closed at 2011-01-31 18:29:58
