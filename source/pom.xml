@@ -52,10 +52,10 @@
         </pluginRepository>
     </pluginRepositories>
     <dependencies>
-        <dependency>
+        <!--dependency>
             <groupId>org.springframework.roo</groupId>
             <artifactId>org.springframework.roo.annotations</artifactId>
-        </dependency>
+        </dependency-->
     </dependencies>
     <dependencyManagement>
         <dependencies>
@@ -113,12 +113,12 @@
                 <version>3.1</version>
             </dependency>
             <!-- ROO dependencies -->
-            <dependency>
+            <!--dependency>
                 <groupId>org.springframework.roo</groupId>
                 <artifactId>org.springframework.roo.annotations</artifactId>
                 <version>${roo.version}</version>
                 <scope>provided</scope>
-            </dependency>
+            </dependency-->
             <!-- Spring dependencies -->
             <dependency>
                 <groupId>org.springframework</groupId>
