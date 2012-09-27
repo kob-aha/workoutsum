@@ -5,11 +5,18 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
+
+import com.ka.workoutsum.domain.repository.ExerciseRepository;
+import com.ka.workoutsum.domain.repository.WeightWorkoutRepository;
+import com.ka.workoutsum.domain.repository.WorkoutExerciseRepository;
 
 @Component
 @Configurable
@@ -20,10 +27,15 @@ public class WorkoutExerciseDataOnDemand {
 	private List<WorkoutExercise> data;
 
 	@Autowired
-    private ExerciseDataOnDemand exerciseDataOnDemand;
+	private ExerciseRepository exerciseDataRepository;
+//    private ExerciseDataOnDemand exerciseDataOnDemand;
 
 	@Autowired
-    private WeightWorkoutDataOnDemand weightWorkoutDataOnDemand;
+//    private WeightWorkoutDataOnDemand weightWorkoutDataOnDemand;
+	private WeightWorkoutRepository weightWorkoutRepository;
+	
+	@Autowired
+	private WorkoutExerciseRepository workoutExerciseRepository;
 
 	public WorkoutExercise getNewTransientWorkoutExercise(int index) {
         WorkoutExercise obj = new WorkoutExercise();
@@ -58,14 +70,14 @@ public class WorkoutExerciseDataOnDemand {
         }
         WorkoutExercise obj = data.get(index);
         Long id = obj.getId();
-        return WorkoutExercise.findWorkoutExercise(id);
+        return workoutExerciseRepository.findOne(id);
     }
 
 	public WorkoutExercise getRandomWorkoutExercise() {
         init();
         WorkoutExercise obj = data.get(rnd.nextInt(data.size()));
         Long id = obj.getId();
-        return WorkoutExercise.findWorkoutExercise(id);
+        return workoutExerciseRepository.findOne(id);
     }
 
 	public boolean modifyWorkoutExercise(WorkoutExercise obj) {
@@ -75,7 +87,7 @@ public class WorkoutExerciseDataOnDemand {
 	public void init() {
         int from = 0;
         int to = 10;
-        data = WorkoutExercise.findWorkoutExerciseEntries(from, to);
+        data = workoutExerciseRepository.findAll(new PageRequest(from, to)).getContent();
         if (data == null) {
             throw new IllegalStateException("Find entries implementation for 'WorkoutExercise' illegally returned null");
         }
@@ -87,7 +99,7 @@ public class WorkoutExerciseDataOnDemand {
         for (int i = 0; i < 10; i++) {
             WorkoutExercise obj = getNewTransientWorkoutExercise(i);
             try {
-                obj.persist();
+            	workoutExerciseRepository.save(obj);
             } catch (ConstraintViolationException e) {
                 StringBuilder msg = new StringBuilder();
                 for (Iterator<ConstraintViolation<?>> iter = e.getConstraintViolations().iterator(); iter.hasNext();) {
@@ -96,7 +108,7 @@ public class WorkoutExerciseDataOnDemand {
                 }
                 throw new RuntimeException(msg.toString(), e);
             }
-            obj.flush();
+            workoutExerciseRepository.flush();
             data.add(obj);
         }
     }

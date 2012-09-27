@@ -5,11 +5,16 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
+
+import com.ka.workoutsum.domain.repository.WeightWorkoutLogRecRepository;
 
 @Component
 @Configurable
@@ -21,6 +26,9 @@ public class WeightWorkoutLogRecDataOnDemand {
 
 	@Autowired
     private WeightWorkoutDataOnDemand weightWorkoutDataOnDemand;
+
+	@Autowired
+	private WeightWorkoutLogRecRepository weightWorkoutLogRecRepository;
 
 	public WeightWorkoutLogRec getNewTransientWeightWorkoutLogRec(int index) {
         WeightWorkoutLogRec obj = new WeightWorkoutLogRec();
@@ -55,14 +63,14 @@ public class WeightWorkoutLogRecDataOnDemand {
         }
         WeightWorkoutLogRec obj = data.get(index);
         Long id = obj.getId();
-        return WeightWorkoutLogRec.findWeightWorkoutLogRec(id);
+        return weightWorkoutLogRecRepository.findOne(id);
     }
 
 	public WeightWorkoutLogRec getRandomWeightWorkoutLogRec() {
         init();
         WeightWorkoutLogRec obj = data.get(rnd.nextInt(data.size()));
         Long id = obj.getId();
-        return WeightWorkoutLogRec.findWeightWorkoutLogRec(id);
+        return weightWorkoutLogRecRepository.findOne(id);
     }
 
 	public boolean modifyWeightWorkoutLogRec(WeightWorkoutLogRec obj) {
@@ -72,7 +80,7 @@ public class WeightWorkoutLogRecDataOnDemand {
 	public void init() {
         int from = 0;
         int to = 10;
-        data = WeightWorkoutLogRec.findWeightWorkoutLogRecEntries(from, to);
+        data = weightWorkoutLogRecRepository.findAll(new PageRequest(from, to)).getContent();
         if (data == null) {
             throw new IllegalStateException("Find entries implementation for 'WeightWorkoutLogRec' illegally returned null");
         }
@@ -84,7 +92,7 @@ public class WeightWorkoutLogRecDataOnDemand {
         for (int i = 0; i < 10; i++) {
             WeightWorkoutLogRec obj = getNewTransientWeightWorkoutLogRec(i);
             try {
-                obj.persist();
+            	weightWorkoutLogRecRepository.save(obj);
             } catch (ConstraintViolationException e) {
                 StringBuilder msg = new StringBuilder();
                 for (Iterator<ConstraintViolation<?>> iter = e.getConstraintViolations().iterator(); iter.hasNext();) {
@@ -93,7 +101,7 @@ public class WeightWorkoutLogRecDataOnDemand {
                 }
                 throw new RuntimeException(msg.toString(), e);
             }
-            obj.flush();
+            weightWorkoutLogRecRepository.flush();
             data.add(obj);
         }
     }

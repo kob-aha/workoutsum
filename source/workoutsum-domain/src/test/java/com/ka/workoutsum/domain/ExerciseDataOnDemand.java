@@ -5,11 +5,16 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
+
+import com.ka.workoutsum.domain.repository.ExerciseRepository;
 
 @Component
 @Configurable
@@ -21,6 +26,9 @@ public class ExerciseDataOnDemand {
 
 	@Autowired
     private MuscleDataOnDemand muscleDataOnDemand;
+	
+	@Autowired
+	private ExerciseRepository exerciseRepository;
 
 	public Exercise getNewTransientExercise(int index) {
         Exercise obj = new Exercise();
@@ -49,14 +57,14 @@ public class ExerciseDataOnDemand {
         }
         Exercise obj = data.get(index);
         Long id = obj.getId();
-        return Exercise.findExercise(id);
+        return exerciseRepository.findOne(id);
     }
 
 	public Exercise getRandomExercise() {
         init();
         Exercise obj = data.get(rnd.nextInt(data.size()));
         Long id = obj.getId();
-        return Exercise.findExercise(id);
+        return exerciseRepository.findOne(id);
     }
 
 	public boolean modifyExercise(Exercise obj) {
@@ -66,7 +74,7 @@ public class ExerciseDataOnDemand {
 	public void init() {
         int from = 0;
         int to = 10;
-        data = Exercise.findExerciseEntries(from, to);
+        data = exerciseRepository.findAll(new PageRequest(from, to)).getContent();
         if (data == null) {
             throw new IllegalStateException("Find entries implementation for 'Exercise' illegally returned null");
         }
@@ -78,7 +86,7 @@ public class ExerciseDataOnDemand {
         for (int i = 0; i < 10; i++) {
             Exercise obj = getNewTransientExercise(i);
             try {
-                obj.persist();
+            	exerciseRepository.save(obj);
             } catch (ConstraintViolationException e) {
                 StringBuilder msg = new StringBuilder();
                 for (Iterator<ConstraintViolation<?>> iter = e.getConstraintViolations().iterator(); iter.hasNext();) {
@@ -87,7 +95,7 @@ public class ExerciseDataOnDemand {
                 }
                 throw new RuntimeException(msg.toString(), e);
             }
-            obj.flush();
+            exerciseRepository.flush();
             data.add(obj);
         }
     }

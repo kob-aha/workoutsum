@@ -71,68 +71,68 @@ public class CardioLogRec {
         return ReflectionToStringBuilder.toString(this, ToStringStyle.SHORT_PREFIX_STYLE);
     }
 
-	@PersistenceContext
-    transient EntityManager entityManager;
-
-	public static final EntityManager entityManager() {
-        EntityManager em = new CardioLogRec().entityManager;
-        if (em == null) throw new IllegalStateException("Entity manager has not been injected (is the Spring Aspects JAR configured as an AJC/AJDT aspects library?)");
-        return em;
-    }
-
-	public static long countCardioLogRecs() {
-        return entityManager().createQuery("SELECT COUNT(o) FROM CardioLogRec o", Long.class).getSingleResult();
-    }
-
-	public static List<CardioLogRec> findAllCardioLogRecs() {
-        return entityManager().createQuery("SELECT o FROM CardioLogRec o", CardioLogRec.class).getResultList();
-    }
-
-	public static CardioLogRec findCardioLogRec(Long id) {
-        if (id == null) return null;
-        return entityManager().find(CardioLogRec.class, id);
-    }
-
-	public static List<CardioLogRec> findCardioLogRecEntries(int firstResult, int maxResults) {
-        return entityManager().createQuery("SELECT o FROM CardioLogRec o", CardioLogRec.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
-    }
-
-	@Transactional
-    public void persist() {
-        if (this.entityManager == null) this.entityManager = entityManager();
-        this.entityManager.persist(this);
-    }
-
-	@Transactional
-    public void remove() {
-        if (this.entityManager == null) this.entityManager = entityManager();
-        if (this.entityManager.contains(this)) {
-            this.entityManager.remove(this);
-        } else {
-            CardioLogRec attached = CardioLogRec.findCardioLogRec(this.id);
-            this.entityManager.remove(attached);
-        }
-    }
-
-	@Transactional
-    public void flush() {
-        if (this.entityManager == null) this.entityManager = entityManager();
-        this.entityManager.flush();
-    }
-
-	@Transactional
-    public void clear() {
-        if (this.entityManager == null) this.entityManager = entityManager();
-        this.entityManager.clear();
-    }
-
-	@Transactional
-    public CardioLogRec merge() {
-        if (this.entityManager == null) this.entityManager = entityManager();
-        CardioLogRec merged = this.entityManager.merge(this);
-        this.entityManager.flush();
-        return merged;
-    }
+//	@PersistenceContext
+//    transient EntityManager entityManager;
+//
+//	public static final EntityManager entityManager() {
+//        EntityManager em = new CardioLogRec().entityManager;
+//        if (em == null) throw new IllegalStateException("Entity manager has not been injected (is the Spring Aspects JAR configured as an AJC/AJDT aspects library?)");
+//        return em;
+//    }
+//
+//	public static long countCardioLogRecs() {
+//        return entityManager().createQuery("SELECT COUNT(o) FROM CardioLogRec o", Long.class).getSingleResult();
+//    }
+//
+//	public static List<CardioLogRec> findAllCardioLogRecs() {
+//        return entityManager().createQuery("SELECT o FROM CardioLogRec o", CardioLogRec.class).getResultList();
+//    }
+//
+//	public static CardioLogRec findCardioLogRec(Long id) {
+//        if (id == null) return null;
+//        return entityManager().find(CardioLogRec.class, id);
+//    }
+//
+//	public static List<CardioLogRec> findCardioLogRecEntries(int firstResult, int maxResults) {
+//        return entityManager().createQuery("SELECT o FROM CardioLogRec o", CardioLogRec.class).setFirstResult(firstResult).setMaxResults(maxResults).getResultList();
+//    }
+//
+//	@Transactional
+//    public void persist() {
+//        if (this.entityManager == null) this.entityManager = entityManager();
+//        this.entityManager.persist(this);
+//    }
+//
+//	@Transactional
+//    public void remove() {
+//        if (this.entityManager == null) this.entityManager = entityManager();
+//        if (this.entityManager.contains(this)) {
+//            this.entityManager.remove(this);
+//        } else {
+//            CardioLogRec attached = CardioLogRec.findCardioLogRec(this.id);
+//            this.entityManager.remove(attached);
+//        }
+//    }
+//
+//	@Transactional
+//    public void flush() {
+//        if (this.entityManager == null) this.entityManager = entityManager();
+//        this.entityManager.flush();
+//    }
+//
+//	@Transactional
+//    public void clear() {
+//        if (this.entityManager == null) this.entityManager = entityManager();
+//        this.entityManager.clear();
+//    }
+//
+//	@Transactional
+//    public CardioLogRec merge() {
+//        if (this.entityManager == null) this.entityManager = entityManager();
+//        CardioLogRec merged = this.entityManager.merge(this);
+//        this.entityManager.flush();
+//        return merged;
+//    }
 
 	public CardioWorkout getWorkout() {
         return this.workout;

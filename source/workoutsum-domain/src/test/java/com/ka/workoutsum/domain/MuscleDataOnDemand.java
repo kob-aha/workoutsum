@@ -5,10 +5,16 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
+
+import com.ka.workoutsum.domain.repository.MuscleRepository;
 
 @Configurable
 @Component
@@ -17,6 +23,9 @@ public class MuscleDataOnDemand {
 	private Random rnd = new SecureRandom();
 
 	private List<Muscle> data;
+
+	@Autowired
+	private MuscleRepository muscleRepository;
 
 	public Muscle getNewTransientMuscle(int index) {
         Muscle obj = new Muscle();
@@ -39,14 +48,14 @@ public class MuscleDataOnDemand {
         }
         Muscle obj = data.get(index);
         Long id = obj.getId();
-        return Muscle.findMuscle(id);
+        return muscleRepository.findOne(id);
     }
 
 	public Muscle getRandomMuscle() {
         init();
         Muscle obj = data.get(rnd.nextInt(data.size()));
         Long id = obj.getId();
-        return Muscle.findMuscle(id);
+        return muscleRepository.findOne(id);
     }
 
 	public boolean modifyMuscle(Muscle obj) {
@@ -56,7 +65,7 @@ public class MuscleDataOnDemand {
 	public void init() {
         int from = 0;
         int to = 10;
-        data = Muscle.findMuscleEntries(from, to);
+        data = muscleRepository.findAll(new PageRequest(from, to)).getContent();
         if (data == null) {
             throw new IllegalStateException("Find entries implementation for 'Muscle' illegally returned null");
         }
@@ -68,7 +77,7 @@ public class MuscleDataOnDemand {
         for (int i = 0; i < 10; i++) {
             Muscle obj = getNewTransientMuscle(i);
             try {
-                obj.persist();
+            	muscleRepository.save(obj);
             } catch (ConstraintViolationException e) {
                 StringBuilder msg = new StringBuilder();
                 for (Iterator<ConstraintViolation<?>> iter = e.getConstraintViolations().iterator(); iter.hasNext();) {
@@ -77,7 +86,7 @@ public class MuscleDataOnDemand {
                 }
                 throw new RuntimeException(msg.toString(), e);
             }
-            obj.flush();
+            muscleRepository.flush();
             data.add(obj);
         }
     }

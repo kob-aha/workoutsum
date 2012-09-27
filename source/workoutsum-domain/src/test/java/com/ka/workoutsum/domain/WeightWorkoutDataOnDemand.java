@@ -5,10 +5,16 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
+
+import com.ka.workoutsum.domain.repository.WeightWorkoutRepository;
 
 @Component
 @Configurable
@@ -17,6 +23,9 @@ public class WeightWorkoutDataOnDemand {
 	private Random rnd = new SecureRandom();
 
 	private List<WeightWorkout> data;
+
+	@Autowired
+	private WeightWorkoutRepository weightWorkoutRepository;
 
 	public WeightWorkout getNewTransientWeightWorkout(int index) {
         WeightWorkout obj = new WeightWorkout();
@@ -45,14 +54,14 @@ public class WeightWorkoutDataOnDemand {
         }
         WeightWorkout obj = data.get(index);
         Long id = obj.getId();
-        return WeightWorkout.findWeightWorkout(id);
+        return weightWorkoutRepository.findOne(id);
     }
 
 	public WeightWorkout getRandomWeightWorkout() {
         init();
         WeightWorkout obj = data.get(rnd.nextInt(data.size()));
         Long id = obj.getId();
-        return WeightWorkout.findWeightWorkout(id);
+        return weightWorkoutRepository.findOne(id);
     }
 
 	public boolean modifyWeightWorkout(WeightWorkout obj) {
@@ -62,7 +71,7 @@ public class WeightWorkoutDataOnDemand {
 	public void init() {
         int from = 0;
         int to = 10;
-        data = WeightWorkout.findWeightWorkoutEntries(from, to);
+        data = weightWorkoutRepository.findAll(new PageRequest(from, to)).getContent();
         if (data == null) {
             throw new IllegalStateException("Find entries implementation for 'WeightWorkout' illegally returned null");
         }
@@ -74,7 +83,7 @@ public class WeightWorkoutDataOnDemand {
         for (int i = 0; i < 10; i++) {
             WeightWorkout obj = getNewTransientWeightWorkout(i);
             try {
-                obj.persist();
+            	weightWorkoutRepository.save(obj);
             } catch (ConstraintViolationException e) {
                 StringBuilder msg = new StringBuilder();
                 for (Iterator<ConstraintViolation<?>> iter = e.getConstraintViolations().iterator(); iter.hasNext();) {
@@ -83,7 +92,7 @@ public class WeightWorkoutDataOnDemand {
                 }
                 throw new RuntimeException(msg.toString(), e);
             }
-            obj.flush();
+            weightWorkoutRepository.flush();
             data.add(obj);
         }
     }

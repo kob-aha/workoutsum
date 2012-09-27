@@ -9,7 +9,11 @@ import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
+
+import com.ka.workoutsum.domain.repository.CardioLogRecRepository;
 
 @Configurable
 @Component
@@ -18,6 +22,9 @@ public class CardioLogRecDataOnDemand {
 	private Random rnd = new SecureRandom();
 
 	private List<CardioLogRec> data;
+	
+	@Autowired
+	private CardioLogRecRepository cardioLogRecRepository;
 
 	@Autowired
     private CardioWorkoutDataOnDemand cardioWorkoutDataOnDemand;
@@ -76,14 +83,16 @@ public class CardioLogRecDataOnDemand {
         }
         CardioLogRec obj = data.get(index);
         Long id = obj.getId();
-        return CardioLogRec.findCardioLogRec(id);
+//        return CardioLogRec.findCardioLogRec(id);  
+        return cardioLogRecRepository.findOne(id);
     }
 
 	public CardioLogRec getRandomCardioLogRec() {
         init();
         CardioLogRec obj = data.get(rnd.nextInt(data.size()));
         Long id = obj.getId();
-        return CardioLogRec.findCardioLogRec(id);
+//        return CardioLogRec.findCardioLogRec(id);
+        return cardioLogRecRepository.findOne(id);
     }
 
 	public boolean modifyCardioLogRec(CardioLogRec obj) {
@@ -91,9 +100,31 @@ public class CardioLogRecDataOnDemand {
     }
 
 	public void init() {
-        int from = 0;
-        int to = 10;
-        data = CardioLogRec.findCardioLogRecEntries(from, to);
+        final int from = 0;
+        final int to = 10;
+//        data = CardioLogRec.findCardioLogRecEntries(from, to);
+        data = cardioLogRecRepository.findAll(new Pageable() {
+			
+			@Override
+			public Sort getSort() {
+				return null;
+			}
+			
+			@Override
+			public int getPageSize() {
+				return to;
+			}
+			
+			@Override
+			public int getPageNumber() {
+				return 1;
+			}
+			
+			@Override
+			public int getOffset() {
+				return from;
+			}
+		}).getContent();
         if (data == null) {
             throw new IllegalStateException("Find entries implementation for 'CardioLogRec' illegally returned null");
         }
@@ -105,7 +136,8 @@ public class CardioLogRecDataOnDemand {
         for (int i = 0; i < 10; i++) {
             CardioLogRec obj = getNewTransientCardioLogRec(i);
             try {
-                obj.persist();
+//                obj.persist();
+                cardioLogRecRepository.save(obj);
             } catch (ConstraintViolationException e) {
                 StringBuilder msg = new StringBuilder();
                 for (Iterator<ConstraintViolation<?>> iter = e.getConstraintViolations().iterator(); iter.hasNext();) {
@@ -114,7 +146,8 @@ public class CardioLogRecDataOnDemand {
                 }
                 throw new RuntimeException(msg.toString(), e);
             }
-            obj.flush();
+//            obj.flush();
+            cardioLogRecRepository.flush();
             data.add(obj);
         }
     }

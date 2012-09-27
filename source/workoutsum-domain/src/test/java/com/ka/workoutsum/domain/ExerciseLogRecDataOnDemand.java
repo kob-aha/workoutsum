@@ -5,11 +5,16 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
+
+import com.ka.workoutsum.domain.repository.ExerciseLogRecRepository;
 
 @Component
 @Configurable
@@ -24,6 +29,9 @@ public class ExerciseLogRecDataOnDemand {
 
 	@Autowired
     private WeightWorkoutLogRecDataOnDemand weightWorkoutLogRecDataOnDemand;
+	
+	@Autowired
+	private ExerciseLogRecRepository exerciseLogRecRepository;
 
 	public ExerciseLogRec getNewTransientExerciseLogRec(int index) {
         ExerciseLogRec obj = new ExerciseLogRec();
@@ -52,14 +60,14 @@ public class ExerciseLogRecDataOnDemand {
         }
         ExerciseLogRec obj = data.get(index);
         Long id = obj.getId();
-        return ExerciseLogRec.findExerciseLogRec(id);
+        return exerciseLogRecRepository.findOne(id);
     }
 
 	public ExerciseLogRec getRandomExerciseLogRec() {
         init();
         ExerciseLogRec obj = data.get(rnd.nextInt(data.size()));
         Long id = obj.getId();
-        return ExerciseLogRec.findExerciseLogRec(id);
+        return exerciseLogRecRepository.findOne(id);
     }
 
 	public boolean modifyExerciseLogRec(ExerciseLogRec obj) {
@@ -69,7 +77,7 @@ public class ExerciseLogRecDataOnDemand {
 	public void init() {
         int from = 0;
         int to = 10;
-        data = ExerciseLogRec.findExerciseLogRecEntries(from, to);
+        data = exerciseLogRecRepository.findAll(new PageRequest(from, to)).getContent();
         if (data == null) {
             throw new IllegalStateException("Find entries implementation for 'ExerciseLogRec' illegally returned null");
         }
@@ -81,7 +89,7 @@ public class ExerciseLogRecDataOnDemand {
         for (int i = 0; i < 10; i++) {
             ExerciseLogRec obj = getNewTransientExerciseLogRec(i);
             try {
-                obj.persist();
+            	exerciseLogRecRepository.save(obj);
             } catch (ConstraintViolationException e) {
                 StringBuilder msg = new StringBuilder();
                 for (Iterator<ConstraintViolation<?>> iter = e.getConstraintViolations().iterator(); iter.hasNext();) {
@@ -90,7 +98,7 @@ public class ExerciseLogRecDataOnDemand {
                 }
                 throw new RuntimeException(msg.toString(), e);
             }
-            obj.flush();
+            exerciseLogRecRepository.flush();
             data.add(obj);
         }
     }
