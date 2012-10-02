@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<parent>
+		<groupId>com.ka.workoutsum</groupId>
+		<artifactId>workoutsum-super-parent</artifactId>
+		<version>0.1.0.BUILD-SNAPSHOT</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.ka.workoutsum</groupId>
+	<artifactId>workoutsum-server</artifactId>
+	<packaging>pom</packaging>
+	<name>Workoutsum Server</name>
+
+	<modules>
+		<module>service-api</module>
+		<module>service-impl</module>
+	</modules>
+</project>

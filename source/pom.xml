@@ -1,6 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.ka.workoutsum</groupId>
 	<artifactId>workoutsum-super-parent</artifactId>
@@ -8,7 +7,7 @@
 	<version>0.1.0.BUILD-SNAPSHOT</version>
 	<name>workoutsum-super-parent</name>
 	<properties>
-		<aspectj.version>1.7.0.RC1</aspectj.version>
+		<!--<aspectj.version>1.7.0.RC1</aspectj.version>-->
 		<java.version>1.6</java.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<roo.version>1.2.2.RELEASE</roo.version>
@@ -18,7 +17,8 @@
 	<modules>
 		<module>domain</module>
 		<module>webapp</module>
-	</modules>
+        <module>server</module>
+  </modules>
 	<repositories>
 		<repository>
 			<id>spring-maven-release</id>
@@ -55,9 +55,33 @@
 	</pluginRepositories>
 	<dependencyManagement>
 		<dependencies>
+
+            <dependency>
+                <groupId>com.ka.workoutsum</groupId>
+                <artifactId>workoutsum-domain</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ka.workoutsum</groupId>
+                <artifactId>workoutsum-service-api</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ka.workoutsum</groupId>
+                <artifactId>workoutsum-service-impl</artifactId>
+                <version>${project.version}</version>
+                <scope>runtime</scope>
+            </dependency>
+
+
 			<!-- General dependencies for standard applications -->
+            <dependency>
+                <groupId>org.codehaus.jackson</groupId>
+                <artifactId>jackson-mapper-asl</artifactId>
+                <version>1.7.1</version>
+            </dependency>
 			<dependency>
-				<groupId>junit</groupId>
+                <groupId>junit</groupId>
 				<artifactId>junit</artifactId>
 				<version>4.10</version>
 				<scope>test</scope>
@@ -82,22 +106,16 @@
 				<artifactId>slf4j-log4j12</artifactId>
 				<version>${slf4j.version}</version>
 			</dependency>
-			<dependency>
-				<groupId>org.aspectj</groupId>
-				<artifactId>aspectjrt</artifactId>
-				<version>${aspectj.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.aspectj</groupId>
-				<artifactId>aspectjweaver</artifactId>
-				<version>${aspectj.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>javax.servlet</groupId>
-				<artifactId>servlet-api</artifactId>
-				<version>2.5</version>
-				<scope>provided</scope>
-			</dependency>
+			<!--<dependency>-->
+				<!--<groupId>org.aspectj</groupId>-->
+				<!--<artifactId>aspectjrt</artifactId>-->
+				<!--<version>${aspectj.version}</version>-->
+			<!--</dependency>-->
+			<!--<dependency>-->
+				<!--<groupId>org.aspectj</groupId>-->
+				<!--<artifactId>aspectjweaver</artifactId>-->
+				<!--<version>${aspectj.version}</version>-->
+			<!--</dependency>-->
 			<dependency>
 				<groupId>net.sf.flexjson</groupId>
 				<artifactId>flexjson</artifactId>
@@ -193,6 +211,37 @@
 					</exclusion>
 				</exclusions>
 			</dependency>
+
+            <!-- Servlet -->
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>servlet-api</artifactId>
+                <version>2.5</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>com.springsource.javax.servlet</artifactId>
+                <version>2.5.0</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>com.springsource.javax.servlet.jsp</artifactId>
+                <version>2.1.0</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>com.springsource.javax.servlet.jsp.jstl</artifactId>
+                <version>1.2.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.taglibs</groupId>
+                <artifactId>com.springsource.org.apache.taglibs.standard</artifactId>
+                <version>1.1.2</version>
+            </dependency>
+
 			<!-- ROO dependencies -->
 			<!--dependency> <groupId>org.springframework.roo</groupId> <artifactId>org.springframework.roo.annotations</artifactId> 
 				<version>${roo.version}</version> <scope>provided</scope> </dependency -->
@@ -244,11 +293,44 @@
 				<artifactId>spring-tx</artifactId>
 				<version>${spring.version}</version>
 			</dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-webmvc</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-expression</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <!--<dependency>-->
+                <!--<groupId>org.springframework</groupId>-->
+                <!--<artifactId>org.springframework.web.servlet</artifactId>-->
+                <!--<version>${spring.version}</version>-->
+            <!--</dependency>-->
+            <!--<dependency>-->
+                <!--<groupId>org.springframework</groupId>-->
+                <!--<artifactId>org.springframework.aspects</artifactId>-->
+                <!--<version>${spring.version}</version>-->
+            <!--</dependency>-->
+
 			<dependency>
 				<groupId>org.springframework.data</groupId>
 				<artifactId>spring-data-jpa</artifactId>
 				<version>1.1.0.RELEASE</version>
 			</dependency>
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>servlet-api</artifactId>
+                <version>2.5</version>
+                <type>jar</type>
+            </dependency>
 		</dependencies>
 	</dependencyManagement>
 	<build>
@@ -270,46 +352,46 @@
 						<encoding>${project.build.sourceEncoding}</encoding>
 					</configuration>
 				</plugin>
-				<plugin>
-					<groupId>org.codehaus.mojo</groupId>
-					<artifactId>aspectj-maven-plugin</artifactId>
-					<version>1.2</version>
-					<!-- NB: do not use 1.3 or 1.3.x due to MASPECTJ-90 and do not use 1.4 
-						due to declare parents issue -->
-					<dependencies>
-						<!-- NB: You must use Maven 2.0.9 or above or these are ignored (see 
-							MNG-2972) -->
-						<dependency>
-							<groupId>org.aspectj</groupId>
-							<artifactId>aspectjrt</artifactId>
-							<version>${aspectj.version}</version>
-						</dependency>
-						<dependency>
-							<groupId>org.aspectj</groupId>
-							<artifactId>aspectjtools</artifactId>
-							<version>${aspectj.version}</version>
-						</dependency>
-					</dependencies>
-					<executions>
-						<execution>
-							<goals>
-								<goal>compile</goal>
-								<goal>test-compile</goal>
-							</goals>
-						</execution>
-					</executions>
-					<configuration>
-						<outxml>true</outxml>
-						<aspectLibraries>
-							<aspectLibrary>
-								<groupId>org.springframework</groupId>
-								<artifactId>spring-aspects</artifactId>
-							</aspectLibrary>
-						</aspectLibraries>
-						<source>${java.version}</source>
-						<target>${java.version}</target>
-					</configuration>
-				</plugin>
+				<!--<plugin>-->
+					<!--<groupId>org.codehaus.mojo</groupId>-->
+					<!--<artifactId>aspectj-maven-plugin</artifactId>-->
+					<!--<version>1.2</version>-->
+					<!--&lt;!&ndash; NB: do not use 1.3 or 1.3.x due to MASPECTJ-90 and do not use 1.4 -->
+						<!--due to declare parents issue &ndash;&gt;-->
+					<!--<dependencies>-->
+						<!--&lt;!&ndash; NB: You must use Maven 2.0.9 or above or these are ignored (see -->
+							<!--MNG-2972) &ndash;&gt;-->
+						<!--<dependency>-->
+							<!--<groupId>org.aspectj</groupId>-->
+							<!--<artifactId>aspectjrt</artifactId>-->
+							<!--<version>${aspectj.version}</version>-->
+						<!--</dependency>-->
+						<!--<dependency>-->
+							<!--<groupId>org.aspectj</groupId>-->
+							<!--<artifactId>aspectjtools</artifactId>-->
+							<!--<version>${aspectj.version}</version>-->
+						<!--</dependency>-->
+					<!--</dependencies>-->
+					<!--<executions>-->
+						<!--<execution>-->
+							<!--<goals>-->
+								<!--<goal>compile</goal>-->
+								<!--<goal>test-compile</goal>-->
+							<!--</goals>-->
+						<!--</execution>-->
+					<!--</executions>-->
+					<!--<configuration>-->
+						<!--<outxml>true</outxml>-->
+						<!--<aspectLibraries>-->
+							<!--<aspectLibrary>-->
+								<!--<groupId>org.springframework</groupId>-->
+								<!--<artifactId>spring-aspects</artifactId>-->
+							<!--</aspectLibrary>-->
+						<!--</aspectLibraries>-->
+						<!--<source>${java.version}</source>-->
+						<!--<target>${java.version}</target>-->
+					<!--</configuration>-->
+				<!--</plugin>-->
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-resources-plugin</artifactId>
