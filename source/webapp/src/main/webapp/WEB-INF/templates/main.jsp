@@ -8,7 +8,7 @@
     </title>
     <!-- Google Font and style definitions -->
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:regular,bold">
-    <link rel="stylesheet" type="text/css" href="<c:url value="/styles/workoutsum.css"/>" />
+    <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/workoutsum.css"/>" />
 </head>
 <body>
 <div id="header">
