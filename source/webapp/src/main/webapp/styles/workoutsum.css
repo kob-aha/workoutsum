@@ -187,9 +187,10 @@ header{
 */
 
 }
-#logo, #logo a{
+#logo, #logo a, #logo h2{
 	text-shadow:0 -1px 0 #999999;
-	color:#ffffff;
+	/*color:#ffffff;*/
+	color:blue;
 }
 #header ul li ul li{
 	border-color:#d7d7d7 #c2c2c2 #c2c2c2 #d7d7d7;

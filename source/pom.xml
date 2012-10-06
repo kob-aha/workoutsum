@@ -13,6 +13,7 @@
 		<roo.version>1.2.2.RELEASE</roo.version>
 		<slf4j.version>1.6.4</slf4j.version>
 		<spring.version>3.1.1.RELEASE</spring.version>
+        <tiles.version>2.1.3</tiles.version>
 	</properties>
 	<modules>
 		<module>domain</module>
@@ -35,6 +36,22 @@
 			<name>Spring Roo Repository</name>
 			<url>http://spring-roo-repository.springsource.org/release</url>
 		</repository>
+
+        <repository>
+            <id>com.springsource.repository.bundles.release</id>
+            <name>SpringSource Enterprise Bundle Repository - SpringSource Bundle Releases</name>
+            <url>http://repository.springsource.com/maven/bundles/release</url>
+        </repository>
+        <repository>
+            <id>com.springsource.repository.bundles.external</id>
+            <name>SpringSource Enterprise Bundle Repository - External Bundle Releases</name>
+            <url>http://repository.springsource.com/maven/bundles/external</url>
+        </repository>
+        <repository>
+            <id>spring.maven.milestone</id>
+            <name>Spring Milestone Maven Repo</name>
+            <url>http://repository.springsource.com/maven/bundles/milestone</url>
+        </repository>
 	</repositories>
 	<pluginRepositories>
 		<pluginRepository>
@@ -56,6 +73,7 @@
 	<dependencyManagement>
 		<dependencies>
 
+            <!-- Inner dependencies -->
             <dependency>
                 <groupId>com.ka.workoutsum</groupId>
                 <artifactId>workoutsum-domain</artifactId>
@@ -73,8 +91,30 @@
                 <scope>runtime</scope>
             </dependency>
 
+            <!-- Tiles -->
+            <dependency>
+                <groupId>org.apache.tiles</groupId>
+                <artifactId>com.springsource.org.apache.tiles</artifactId>
+                <version>${tiles.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.tiles</groupId>
+                <artifactId>com.springsource.org.apache.tiles.core</artifactId>
+                <version>${tiles.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.tiles</groupId>
+                <artifactId>com.springsource.org.apache.tiles.jsp</artifactId>
+                <version>${tiles.version}</version>
+            </dependency>
 
-			<!-- General dependencies for standard applications -->
+            <dependency>
+                <groupId>org.apache.el</groupId>
+                <artifactId>com.springsource.org.apache.el</artifactId>
+                <version>6.0.20</version>
+            </dependency>
+
+            <!-- General dependencies for standard applications -->
             <dependency>
                 <groupId>org.codehaus.jackson</groupId>
                 <artifactId>jackson-mapper-asl</artifactId>
@@ -241,6 +281,8 @@
                 <artifactId>com.springsource.org.apache.taglibs.standard</artifactId>
                 <version>1.1.2</version>
             </dependency>
+
+
 
 			<!-- ROO dependencies -->
 			<!--dependency> <groupId>org.springframework.roo</groupId> <artifactId>org.springframework.roo.annotations</artifactId> 

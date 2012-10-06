@@ -1,4 +1,7 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
+
+<html>
 
     <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -6,10 +9,7 @@
 
       <!-- Google Font and style definitions -->
       <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:regular,bold">
-
-      <!-- link rel="stylesheet" href="styles/workoutsum.css" id="themestyle"-->
-      <!--link rel="stylesheet" href="<spring:url value="/static/styles/workoutsum.css" htmlEscape="true" />" type="text/css"/-->
-      <link rel="stylesheet" type="text/css" href="<spring:url value="/static/styles/workoutsum.css" htmlEscape="true" />"/>
+      <link rel="stylesheet" type="text/css" href="<c:url value="/styles/workoutsum.css"/>" />
     </head>
 
     <body>

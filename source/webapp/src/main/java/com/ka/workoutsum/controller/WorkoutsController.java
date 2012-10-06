@@ -26,7 +26,7 @@ public class WorkoutsController {
 
     @RequestMapping("/")
     public String welcomeHandler() {
-        return "welcome";
+        return "welcomeRedirect";
     }
 
     @RequestMapping(value = "/workouts/{id}",method = RequestMethod.GET)

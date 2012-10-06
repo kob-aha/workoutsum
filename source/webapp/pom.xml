@@ -13,6 +13,25 @@
 	<name>Workoutsum Webapp</name>
 
 	<dependencies>
+
+        <dependency>
+            <groupId>org.apache.tiles</groupId>
+            <artifactId>com.springsource.org.apache.tiles</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tiles</groupId>
+            <artifactId>com.springsource.org.apache.tiles.core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tiles</groupId>
+            <artifactId>com.springsource.org.apache.tiles.jsp</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.el</groupId>
+            <artifactId>com.springsource.org.apache.el</artifactId>
+        </dependency>
+
         <!-- Inner modules dependencies -->
 		<dependency>
 			<groupId>com.ka.workoutsum</groupId>
@@ -373,6 +392,9 @@
                     <scanIntervalSeconds>10</scanIntervalSeconds>
                     <stopKey>foo</stopKey>
                     <stopPort>9999</stopPort>
+                    <webAppConfig>
+                        <contextPath>/workoutsum</contextPath>
+                    </webAppConfig>
                 </configuration>
 				<!--<configuration>-->
 					<!--<webAppConfig>-->
