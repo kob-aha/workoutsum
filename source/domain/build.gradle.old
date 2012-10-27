@@ -1,9 +1,27 @@
 
 
-description = 'Workoutsum Service Api'
+description = 'workoutsum-domain'
+
+//configurations.all {
+//  resolutionStrategy {
+//
+//    // force certain versions of dependencies (including transitive)
+//    //  *append new forced modules:
+//    force 'org.springframework:spring-orm:3.1.1.RELEASE', 'org.springframework:spring-tx:3.1.1.RELEASE', 'org.springframework:spring-core:3.1.1.RELEASE', 'org.springframework:spring-beans:3.1.1.RELEASE'
+//  }
+//}
+
+// Fix JPA problem (http://forums.gradle.org/gradle/topics/regression_with_classloading_in_the_jetty_plugin_with_gradle_1_0_milestone_6?from_gsfn=true)
+sourceSets {
+    main {
+        output.resourcesDir = "build/classes/main"
+    }
+    test{
+        output.resourcesDir = "build/classes/test"
+    }
+}
 
 dependencies {
-  compile project(':workoutsum-domain')
     compile group: 'log4j', name: 'log4j', version:'1.2.16'
     compile group: 'org.slf4j', name: 'slf4j-api', version:'1.6.4'
     compile group: 'org.slf4j', name: 'jcl-over-slf4j', version:'1.6.4'
@@ -38,9 +56,10 @@ exclude(module: 'jaxb-impl')
 exclude(module: 'commons-logging')
 exclude(module: 'xml-apis')
 }
+    compile group: 'org.springframework.data', name: 'spring-data-jpa', version:'1.1.0.RELEASE'
     testCompile group: 'junit', name: 'junit', version:'4.10'
     testCompile group: 'org.springframework', name: 'spring-test', version:'3.1.1.RELEASE'
-    compile(group: 'javax.servlet', name: 'servlet-api', version:'2.5'){
-	provided = true
-    }
+    compile(group: 'javax.servlet', name: 'servlet-api', version:'2.5') {
+provided : true
+}
   }

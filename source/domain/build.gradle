@@ -56,10 +56,16 @@ exclude(module: 'jaxb-impl')
 exclude(module: 'commons-logging')
 exclude(module: 'xml-apis')
 }
-    compile group: 'org.springframework.data', name: 'spring-data-jpa', version:'1.1.0.RELEASE'
+
+    compile (group: 'org.springframework.data', name: 'spring-data-jpa', version:'1.1.0.RELEASE') {
+	exclude(module: 'spring-orm')
+	exclude(module: 'spring-core')
+	exclude(module: 'spring-tx')
+	exclude(module: 'spring-beans')
+}
     testCompile group: 'junit', name: 'junit', version:'4.10'
     testCompile group: 'org.springframework', name: 'spring-test', version:'3.1.1.RELEASE'
-    compile(group: 'javax.servlet', name: 'servlet-api', version:'2.5') {
-provided : true
-}
+    //compile(group: 'javax.servlet', name: 'servlet-api', version:'2.5') {
+//provided = true
+//}
   }
