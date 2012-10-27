@@ -1,0 +1,64 @@
+[INFO] Scanning for projects...
+[WARNING] 
+[WARNING] Some problems were encountered while building the effective model for com.ka.workoutsum:workoutsum-domain:jar:0.1.0.BUILD-SNAPSHOT
+[WARNING] 'dependencyManagement.dependencies.dependency.(groupId:artifactId:type:classifier)' must be unique: javax.servlet:servlet-api:jar -> duplicate declaration of version 2.5 @ com.ka.workoutsum:workoutsum-super-parent:0.1.0.BUILD-SNAPSHOT, /home/koby/Incubator/workoutsum/source/pom.xml, line 370, column 25
+[WARNING] 
+[WARNING] It is highly recommended to fix these problems because they threaten the stability of your build.
+[WARNING] 
+[WARNING] For this reason, future Maven versions might no longer support building such malformed projects.
+[WARNING] 
+[INFO]                                                                         
+[INFO] ------------------------------------------------------------------------
+[INFO] Building workoutsum-domain 0.1.0.BUILD-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO] 
+[INFO] --- maven-dependency-plugin:2.1:tree (default-cli) @ workoutsum-domain ---
+[INFO] com.ka.workoutsum:workoutsum-domain:jar:0.1.0.BUILD-SNAPSHOT
+[INFO] +- junit:junit:jar:4.10:test
+[INFO] +- log4j:log4j:jar:1.2.16:compile
+[INFO] +- org.slf4j:slf4j-api:jar:1.6.4:compile
+[INFO] +- org.slf4j:jcl-over-slf4j:jar:1.6.4:compile
+[INFO] +- org.slf4j:slf4j-log4j12:jar:1.6.4:compile
+[INFO] +- javax.servlet:servlet-api:jar:2.5:provided
+[INFO] +- net.sf.flexjson:flexjson:jar:2.1:compile
+[INFO] +- org.apache.commons:commons-lang3:jar:3.1:compile
+[INFO] +- org.springframework:spring-core:jar:3.1.1.RELEASE:compile
+[INFO] |  \- org.springframework:spring-asm:jar:3.1.1.RELEASE:compile
+[INFO] +- org.springframework:spring-test:jar:3.1.1.RELEASE:test
+[INFO] +- org.springframework:spring-context:jar:3.1.1.RELEASE:compile
+[INFO] |  +- org.springframework:spring-beans:jar:3.1.1.RELEASE:compile
+[INFO] |  \- org.springframework:spring-expression:jar:3.1.1.RELEASE:compile
+[INFO] +- org.springframework:spring-aop:jar:3.1.1.RELEASE:compile
+[INFO] |  \- aopalliance:aopalliance:jar:1.0:compile
+[INFO] +- org.springframework:spring-aspects:jar:3.1.1.RELEASE:compile
+[INFO] |  \- org.springframework:spring-context-support:jar:3.1.1.RELEASE:compile
+[INFO] +- com.h2database:h2:jar:1.3.164:compile
+[INFO] +- org.hibernate:hibernate-core:jar:3.6.9.Final:compile
+[INFO] |  +- antlr:antlr:jar:2.7.6:compile
+[INFO] |  +- dom4j:dom4j:jar:1.6.1:compile
+[INFO] |  \- org.hibernate:hibernate-commons-annotations:jar:3.2.0.Final:compile
+[INFO] +- org.hibernate:hibernate-entitymanager:jar:3.6.9.Final:compile
+[INFO] |  \- javassist:javassist:jar:3.12.0.GA:compile
+[INFO] +- org.hibernate.javax.persistence:hibernate-jpa-2.0-api:jar:1.0.1.Final:compile
+[INFO] +- commons-collections:commons-collections:jar:3.2.1:compile
+[INFO] +- org.hibernate:hibernate-validator:jar:4.2.0.Final:compile
+[INFO] +- javax.validation:validation-api:jar:1.0.0.GA:compile
+[INFO] +- cglib:cglib-nodep:jar:2.2.2:compile
+[INFO] +- javax.transaction:jta:jar:1.1:compile
+[INFO] +- org.springframework:spring-jdbc:jar:3.1.1.RELEASE:compile
+[INFO] |  \- org.springframework:spring-tx:jar:3.1.1.RELEASE:compile
+[INFO] +- org.springframework:spring-orm:jar:3.1.1.RELEASE:compile
+[INFO] +- commons-pool:commons-pool:jar:1.5.6:compile
+[INFO] +- commons-dbcp:commons-dbcp:jar:1.3:compile
+[INFO] \- org.springframework.data:spring-data-jpa:jar:1.1.0.RELEASE:compile
+[INFO]    +- org.springframework.data:spring-data-commons-core:jar:1.3.0.RELEASE:compile
+[INFO]    |  \- junit:junit-dep:jar:4.8.2:compile
+[INFO]    |     \- org.hamcrest:hamcrest-core:jar:1.1:compile
+[INFO]    \- org.aspectj:aspectjrt:jar:1.6.12:compile
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 8.065s
+[INFO] Finished at: Sat Oct 20 22:13:19 IST 2012
+[INFO] Final Memory: 12M/156M
+[INFO] ------------------------------------------------------------------------

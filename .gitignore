@@ -1,8 +1,12 @@
 target
 target/*
+build
+build/*
 *~
 .classpath
 .project
 .settings
 projects
 *.iml
+.gradle
+.gradle/*

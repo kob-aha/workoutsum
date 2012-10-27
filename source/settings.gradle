@@ -1,0 +1,8 @@
+rootProject.name = 'workoutsum-super-parent'
+include ':workoutsum-domain', ':workoutsum-server', ':workoutsum-server:workoutsum-service-api', ':workoutsum-server:workoutsum-service-impl', ':workoutsum-webapp'
+
+project(':workoutsum-domain').projectDir = "$rootDir/domain/" as File
+project(':workoutsum-server').projectDir = "$rootDir/server/" as File
+project(':workoutsum-server:workoutsum-service-api').projectDir = "$rootDir/server/service-api/" as File
+project(':workoutsum-server:workoutsum-service-impl').projectDir = "$rootDir/server/service-impl/" as File
+project(':workoutsum-webapp').projectDir = "$rootDir/webapp/" as File

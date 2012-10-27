@@ -1,0 +1,39 @@
+allprojects  {
+  apply plugin: 'maven'
+
+  group = 'com.ka.workoutsum'
+  version = '0.1.0.BUILD-SNAPSHOT'
+  
+}
+
+subprojects {
+  apply plugin: 'java'
+  sourceCompatibility = 1.5
+  targetCompatibility = 1.5
+
+  
+  repositories {
+    mavenRepo url: "file:${System.properties['user.home']}/Programs/Maven/repository/"
+    
+    mavenRepo url: "http://maven.springframework.org/release"
+    mavenRepo url: "http://maven.springframework.org/milestone"
+    mavenRepo url: "http://spring-roo-repository.springsource.org/release"
+    mavenRepo url: "http://repository.springsource.com/maven/bundles/release"
+    mavenRepo url: "http://repository.springsource.com/maven/bundles/external"
+    mavenRepo url: "http://repository.springsource.com/maven/bundles/milestone"
+    mavenRepo url: "http://repo.maven.apache.org/maven2"
+  }
+
+    configurations.all {
+        resolutionStrategy {
+
+            // force certain versions of dependencies (including transitive)
+            //  *append new forced modules:
+            force 'org.springframework:spring-orm:3.1.1.RELEASE', 'org.springframework:spring-tx:3.1.1.RELEASE', 'org.springframework:spring-core:3.1.1.RELEASE', 'org.springframework:spring-beans:3.1.1.RELEASE'
+        }
+    }
+
+  
+  
+  
+}
