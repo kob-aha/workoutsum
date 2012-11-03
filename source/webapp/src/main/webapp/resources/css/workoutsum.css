@@ -1343,3 +1343,24 @@ nav ul li.i_youtube a span, .i_youtube{ background-image: url(../images/icons/da
 nav ul li.i_youtube_2 a span, .i_youtube_2{ background-image: url(../images/icons/dark/youtube_2.png);}
 nav ul li.i_zip_file a span, .i_zip_file{ background-image: url(../images/icons/dark/zip_file.png);}
 nav ul li.i_zip_files a span, .i_zip_files{ background-image: url(../images/icons/dark/zip_files.png);}
+
+.vertical_menu {
+    float: left;
+    width: 90px;
+    height: 100%;
+    border: 1px dotted blue;
+    background-color: #EEFFFF;
+    padding: 5px;
+    margin: 5px;
+}
+.vertical_menu li {
+    list-style: none;
+    margin: 5px;
+}
+.vertical_menu li a {
+    text-decoration: none;
+    color: black;
+}
+.vertical_menu li a:hover {
+    text-decoration: underline;
+}

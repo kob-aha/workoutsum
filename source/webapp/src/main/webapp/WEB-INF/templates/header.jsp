@@ -1,1 +1,1 @@
-Simple Tiles 2 Example
+<p>Simple Tiles 2 Example</p>

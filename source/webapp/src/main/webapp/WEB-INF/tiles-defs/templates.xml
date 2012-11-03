@@ -18,6 +18,12 @@
 		<put-attribute name="body" value="/WEB-INF/jsp/index.jsp" />
 	</definition>
 
+    <definition name="nav" template="/WEB-INF/templates/try.jsp">
+        <put-attribute name="title" value="Simple Tiles 2 Example" type="string" />
+        <put-attribute name="menu" value="/WEB-INF/templates/tryMenu.jsp" />
+        <!--<put-attribute name="body" value="/WEB-INF/jsp/index.jsp" />-->
+    </definition>
+
     <!--<definition name="index" template="/WEB-INF/templates/main.jsp">-->
         <!--<put-attribute name="title" value="Simple Tiles 2 Example" type="string" />-->
         <!--<put-attribute name="header" value="/WEB-INF/templates/header.jsp" />-->
