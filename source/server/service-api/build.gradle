@@ -4,6 +4,15 @@ description = 'Workoutsum Service Api'
 
 apply plugin: 'java'
 
+install {
+  inputs.file file("target/${project.name}-${project.version}.jar")
+  outputs.file file("${System.properties['user.home']}/Programs/Maven/repository/com/ka/workoutsum/${project.name}/${project.name}-${project.version}.jar")
+}
+
+install << {
+    println " ===== In install ${project.name} ===== "
+}
+
 dependencies {
   compile project(':workoutsum-domain')
     compile group: 'log4j', name: 'log4j', version:'1.2.16'
