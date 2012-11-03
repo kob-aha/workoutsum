@@ -2,6 +2,7 @@
 
 description = 'Workoutsum Webapp'
 
+apply plugin: 'java'
 apply plugin: 'war'
 
 dependencies {
@@ -28,7 +29,7 @@ exclude(module: 'commons-logging')
     compile group: 'commons-collections', name: 'commons-collections', version:'3.2.1'
     compile group: 'javax.servlet', name: 'com.springsource.javax.servlet.jsp.jstl', version:'1.2.0'
     compile group: 'org.apache.taglibs', name: 'com.springsource.org.apache.taglibs.standard', version:'1.1.2'
-  runtime project(':workoutsum-server:workoutsum-service-impl')
+  runtime project(path: ':workoutsum-server:workoutsum-service-impl', configuration: 'archives')
     testCompile group: 'junit', name: 'junit', version:'4.10'
     testCompile group: 'org.springframework', name: 'spring-test', version:'3.1.1.RELEASE'
     providedCompile group: 'javax.servlet', name: 'com.springsource.javax.servlet', version:'2.5.0'

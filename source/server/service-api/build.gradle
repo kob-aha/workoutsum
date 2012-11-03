@@ -2,6 +2,8 @@
 
 description = 'Workoutsum Service Api'
 
+apply plugin: 'java'
+
 dependencies {
   compile project(':workoutsum-domain')
     compile group: 'log4j', name: 'log4j', version:'1.2.16'
