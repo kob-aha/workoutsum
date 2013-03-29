@@ -42,5 +42,5 @@ subprojects {
 
 task wrapper(type: Wrapper) {
         description = 'Generates gradlew[.bat] scripts'
-        gradleVersion = '1.2'
+        gradleVersion = '1.5'
     }
